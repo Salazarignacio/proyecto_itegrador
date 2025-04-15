@@ -28,6 +28,9 @@ def binario_hexagesimal(num):
 """ Esta funcion es la que le pide los datos al usuario y luego decide a que funcion llamar segun los datos ingresados """
 
 def convertir_numero(original, conversion,num):
+    """ Convertimos el texto a minusculas para validar entradas con mayusculas"""
+    original = original.lower() 
+    conversion = conversion.lower()
     if original == "binario" and conversion == "decimal":
         binario_decimal(num)
     elif original == "decimal" and conversion == "binario":
