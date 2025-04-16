@@ -43,6 +43,10 @@ def octal_binario(num):
 
 
 
+def num_to_decimal(num, type):
+    base = detectar_base(type)
+    decimal = int(num, base)
+    print(f"el número {type} convertido a decimal es: {decimal}")
 
 
 def detectar_base(name):
@@ -73,6 +77,8 @@ def convertir_numero(original, conversion,num):
         binario_octal(num)
     elif original == "binario" and conversion == "hexagesimal":
         binario_hexagesimal(num)
+    elif original == "binario" and conversion == "decimal":
+        num_to_decimal(num,original)
     print(f"El numero es {num}")
 
 def comenzar():
