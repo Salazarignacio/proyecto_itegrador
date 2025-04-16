@@ -2,7 +2,17 @@
 
 """ Funcion que convierte un numero binario dado por el usuario a sistema decimal """
 def binario_decimal(num):
-    print("Esta funcion convierte de BINARIO a DECIMAL")
+    contador = 1
+    decimal = 0
+    while num >=1:
+        cifra = num / 10
+        cifra = cifra % 1 * 10
+        cifra = round(cifra)
+        if cifra == 1:
+            decimal += contador
+        num = int(num / 10)
+        contador *= 2
+    return decimal
 
 
 """ Esta funcion convierte un numero decimal dado por el usuario a sistema binario """    
@@ -36,12 +46,6 @@ def octal_hexadecimal(num):
 def octal_binario(num):
     num_bin = bin(int(str(num),8))[2:]# el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
     print(f"El número {num} convertido a binario es: {num_bin}")
-
-
-
-
-
-
 
 def num_to_decimal(num, type):
     base = detectar_base(type)
