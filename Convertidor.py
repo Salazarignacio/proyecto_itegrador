@@ -45,6 +45,17 @@ def octal_binario(num):
 
 
 
+def detectar_base(name):
+    name = name.lower()  # para hacerlo insensible a mayúsculas
+    if name == "binario":
+        return 2
+    elif name == "octal":
+        return 8
+    elif name == "hexadecimal":
+        return 16
+    else:
+        print("El sistema numerico ingresado es incorrecto")  # por si el tipo no es válido
+
 
 def convertir_numero(original, conversion,num):
     """ Convertimos el texto a minusculas para validar entradas con mayusculas"""
