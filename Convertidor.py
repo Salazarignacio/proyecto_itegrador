@@ -27,6 +27,25 @@ def binario_hexagesimal(num):
 
 """ Esta funcion es la que le pide los datos al usuario y luego decide a que funcion llamar segun los datos ingresados """
 
+# convertir de octal a hexadecimal 
+def octal_hexadecimal(num):
+    num_hexa = hex(int(str(num),8))[2:].upper() # el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
+    print(f"el  número hexadecimal es {num_hexa}")
+
+#convertir octal a binario
+def octal_binario(num):
+    num_bin = bin(int(str(num),8))[2:]# el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
+    print(f"El número {num} convertido a binario es: {num_bin}")
+
+
+
+
+
+
+
+
+
+
 def convertir_numero(original, conversion,num):
     """ Convertimos el texto a minusculas para validar entradas con mayusculas"""
     original = original.lower() 
@@ -35,6 +54,10 @@ def convertir_numero(original, conversion,num):
         binario_decimal(num)
     elif original == "decimal" and conversion == "binario":
         decimal_binario(num)  
+    elif original == "octal" and conversion == "hexadecimal":
+        octal_hexadecimal(num)
+    elif original == "octal" and conversion == "binario":
+        octal_binario(num)
     elif original == "binario" and conversion == "octal":
         binario_octal(num)
     elif original == "binario" and conversion == "hexagesimal":
