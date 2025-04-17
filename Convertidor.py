@@ -6,8 +6,7 @@ def binario_decimal(num):
     decimal = 0
     while num >=1:
         cifra = num / 10
-        cifra = cifra % 1 * 10
-        cifra = round(cifra)
+        cifra = round(cifra % 1 * 10)
         if cifra == 1:
             decimal += contador
         num = int(num / 10)
