@@ -39,4 +39,4 @@ def hexadecimal_decimal(num):
     print(convertido)
     return convertido
 
-hexadecimal_decimal("101112")
+hexadecimal_decimal("1F")

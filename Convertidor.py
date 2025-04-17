@@ -15,10 +15,16 @@ def binario_decimal(num):
     return decimal
     
 def binario_octal(num):
-    print("Esta funcion convierte de BINARIO a OCTAL")
+    decimal = binario_decimal(num)
+    octal = decimal_sistema(decimal,8)
+    print(octal)
+    return octal
     
 def binario_hexadecimal(num):
-    print("Esta funcion convierte de BINARIO a OCTAL")
+    decimal = binario_decimal(num)
+    hexadecimal = decimal_hexadecimal(decimal)
+    print(hexadecimal)
+    return hexadecimal
 
 
 """ ################## DE DECIMAL A: ##################"""
