@@ -1,9 +1,8 @@
-""" Convertidor de sistemas numericos """
-
-""" DE BINARIO A: """
+"""################## DE BINARIO A: ##################"""
 
 def binario_decimal(num):
     contador = 1
+    numero = num
     decimal = 0
     while num >=1:
         cifra = num / 10
@@ -12,6 +11,7 @@ def binario_decimal(num):
             decimal += contador
         num = int(num / 10)
         contador *= 2
+    print(f"BASE BINARIO: {numero} - BASE DECIMAL: {decimal}")
     return decimal
     
 def binario_octal(num):
@@ -69,7 +69,7 @@ def decimal_hexadecimal(num):
     print(numero_convertido)
  
 
-""" DE OCTAL A """
+"""################## DE OCTAL A: ##################"""
 
 # convertir de octal a hexadecimal 
 def octal_hexadecimal(num):
@@ -81,6 +81,7 @@ def octal_binario(num):
     num_bin = bin(int(str(num),8))[2:]# el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
     print(f"El número {num} convertido a binario es: {num_bin}")
 
+#convertir octal a decimal
 def octal_decimal(num, type):
     base = detectar_base(type)
     decimal = int(num, base)
@@ -98,11 +99,28 @@ def detectar_base(name):
     else:
         print("El sistema numerico ingresado es incorrecto")  # por si el tipo no es válido
 
-""" DE HEXADECIMAL A """
+"""################## DE HEXADECIMAL A: ##################"""
 
 """ Decimal """
+
 def hexadecimal_decimal(num):
-    print("Esta funcion convierte de hexa a decimal")
+    numero = num
+    multiplicador = 1
+    convertido = 0
+    exp = int(len(str(num)))
+    exp2 = int(len(str(num))) - 1
+
+    for i in range(exp):
+        while numero >= 9:
+            numero = int(numero / 10)
+            multiplicador *= 10
+        convertido += numero * 16 ** exp2
+        exp2 -=1
+        numero = num - (multiplicador * numero)
+        num = numero
+        multiplicador = 1
+    print(convertido)
+
 """ Binario """
 def hexadecimal_binario(num):
     print("Esta funcion convierte de hexa a binario")
@@ -114,7 +132,7 @@ def hexadecimal_octal(num):
 
 
 
-""" FUNCION PRINCIPAL """
+"""################## FUNCION PRINCIPAL ##################"""
 """ Esta funcion es la que le pide los datos al usuario y luego decide a que funcion llamar segun los datos ingresados """
 
 def convertir_numero(original, conversion,num):
