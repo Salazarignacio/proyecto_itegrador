@@ -1,5 +1,27 @@
+def letra_numero(l):
+    salida = ""
+    for i in range(len(l)):
+        if l[i] == "A":
+            salida += '10'
+        elif l[i] == 'B':
+            salida += '11'
+        elif l[i] == 'C':
+            salida += '12'
+        elif l[i] == 'D':
+            salida += '13'
+        elif l[i] == 'E':
+            salida += '14'
+        elif l[i] == 'F':
+            salida += '15'
+        else:
+            salida += l[i]
+    return salida
+
+
 def hexadecimal_decimal(num):
-    numero = num
+    numero = int(letra_numero(num))
+    num = numero
+    print(num)
     multiplicador = 1
     convertido = 0
     exp = int(len(str(num)))
@@ -15,6 +37,6 @@ def hexadecimal_decimal(num):
         num = numero
         multiplicador = 1
     print(convertido)
-    
+    return convertido
 
-hexadecimal_decimal(788)
+hexadecimal_decimal("101112")
