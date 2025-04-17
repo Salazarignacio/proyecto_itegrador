@@ -1,32 +1,47 @@
-def binario_decimal(num):
-    contador = 1
-    decimal = 0
-    while num >=1:
-        cifra = num / 10
-        cifra = round(cifra % 1 * 10)
-        if cifra == 1:
-            decimal += contador
-        num = int(num / 10)
-        contador *= 2
-    return decimal
-
-def decimal_sistema(num, num2):
-    sistema=""
+def decimal_sistema(num, base):
+    num_convertido=""
     numero=num
     while num>0:
-        ult_digito=num%num2
-        sistema=str(ult_digito)+sistema
-        num=num//num2
-    print(f"{numero} en sistema seria {sistema}")
+        ult_digito=num%base
+        num_convertido=str(ult_digito)+num_convertido
+        num=num//base
+    
+    sistema = ""
+    if base == 8:
+        sistema = "octal"
+    elif base == 2:
+        sistema = "decimal"
+    print(f"{numero} en sistema {sistema} seria {num_convertido}")   
 
-decimal_sistema(12,8)
+def numero_letra(n):
+    n = str(n)
+    if n == "10":
+        n = 'A'
+    elif n == '11':
+        n = 'B'
+    elif n == '12':
+        n = 'C'
+    elif n == '13':
+        n = 'D'
+    elif n == '14':
+        n = 'E'
+    elif n == '15':
+        n = 'G'
+    return n
 
-def octal_binario(num):
-    num_bin = bin(int(str(num),8))[2:]# el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
-    print(f"El número {num} convertido a binario es: {num_bin}")
 
-def binario_octal(num):
-    decimal = binario_decimal(num)
-    octal_binario(decimal)
 
-octal_binario(287)
+def decimal_hexa(num):
+    numero_convertido = ""
+    numero = num
+    a_letra = ""
+    while numero >= 16:
+        a_letra = numero_letra(numero % 16)
+        numero_convertido = a_letra + numero_convertido
+        numero = numero // 16
+    a_letra = numero_letra(numero % 16)
+    numero_convertido = a_letra + numero_convertido
+    print(numero_convertido)
+
+
+decimal_hexa(6699)
