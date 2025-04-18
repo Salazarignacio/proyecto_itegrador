@@ -1,6 +1,7 @@
 """################## DE BINARIO A: ##################"""
 
 def binario_decimal(num):
+    num = int(num)
     contador = 1
     numero = num
     decimal = 0
@@ -15,12 +16,14 @@ def binario_decimal(num):
     return decimal
     
 def binario_octal(num):
+    num = int(num)
     decimal = binario_decimal(num)
     octal = decimal_sistema(decimal,8)
     print(octal)
     return octal
     
 def binario_hexadecimal(num):
+    num = int(num)
     decimal = binario_decimal(num)
     hexadecimal = decimal_hexadecimal(decimal)
     print(hexadecimal)
@@ -31,6 +34,7 @@ def binario_hexadecimal(num):
     
 """ Binario y Octal """
 def decimal_sistema(num, base):
+    num = int(num)
     num_convertido=""
     numero=num
     while num>0:
@@ -44,6 +48,7 @@ def decimal_sistema(num, base):
     elif base == 2:
         sistema = "decimal"
     print(f"{numero} en sistema {sistema} seria {num_convertido}")  
+    return num_convertido
 
 """ Hexadecimal """
 def numero_letra(n):
@@ -59,10 +64,11 @@ def numero_letra(n):
     elif n == '14':
         n = 'E'
     elif n == '15':
-        n = 'G'
+        n = 'F'
     return n
 
 def decimal_hexadecimal(num):
+    num = int(num)
     numero_convertido = ""
     numero = num
     a_letra = ""
@@ -73,25 +79,48 @@ def decimal_hexadecimal(num):
     a_letra = numero_letra(numero % 16)
     numero_convertido = a_letra + numero_convertido
     print(numero_convertido)
+    return numero_convertido
  
 
 """################## DE OCTAL A: ##################"""
 
 # convertir de octal a hexadecimal 
 def octal_hexadecimal(num):
+    num = int(num)
     num_hexa = hex(int(str(num),8))[2:].upper() # el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
     print(f"el  número hexadecimal es {num_hexa}")
+    return num_hexa
 
 #convertir octal a binario
 def octal_binario(num):
+    num = int(num)
     num_bin = bin(int(str(num),8))[2:]# el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
     print(f"El número {num} convertido a binario es: {num_bin}")
+    return num_bin
 
 #convertir octal a decimal
-def octal_decimal(num, type):
-    base = detectar_base(type)
-    decimal = int(num, base)
-    print(f"el número {type} convertido a decimal es: {decimal}")
+def octal_decimal(num):
+    """
+    Convierte una cadena con dígitos octales (0–7) a su valor decimal.
+    Ejemplo: "17" → 1*8 + 7 = 15
+    """
+    octal_str = num.strip()     # Quitamos espacios al inicio y al final
+    resultado = 0
+    multiplicador = 1           # 8^0 al empezar
+
+    # Recorremos de derecha a izquierda: el dígito de menor peso primero
+    for c in reversed(octal_str):
+        # Validamos que c sea entre '0' y '7'
+        if '0' <= c <= '7':
+            valor = int(c)
+        else:
+            raise ValueError(f"'{c}' no es un dígito octal válido")
+        resultado += valor * multiplicador
+        multiplicador *= 8
+
+    print(f"el número {octal_str} convertido a decimal es: {resultado}")
+    return resultado
+
 
 
 def detectar_base(name):
@@ -109,56 +138,59 @@ def detectar_base(name):
 
 """ Decimal """
 
-def letra_numero(l):
-    salida = ""
-    for i in range(len(l)):
-        if l[i] == "A":
-            salida += '10'
-        elif l[i] == 'B':
-            salida += '11'
-        elif l[i] == 'C':
-            salida += '12'
-        elif l[i] == 'D':
-            salida += '13'
-        elif l[i] == 'E':
-            salida += '14'
-        elif l[i] == 'F':
-            salida += '15'
-        else:
-            salida += l[i]
-    return salida
+def valor_hexadecimal(c):
+    """
+    Devuelve el valor numérico de un dígito hexadecimal (0–9, A–F).
+    Lanza ValueError si el caracter no es válido.
+    """
+    c = c.upper()  # Para aceptar tanto 'a' como 'A'
+    if '0' <= c <= '9':
+        return int(c)
+    elif c == 'A':
+        return 10
+    elif c == 'B':
+        return 11
+    elif c == 'C':
+        return 12
+    elif c == 'D':
+        return 13
+    elif c == 'E':
+        return 14
+    elif c == 'F':
+        return 15
+    else:
+        raise ValueError(f"'{c}' no es un dígito hexadecimal válido")
 
+def hexadecimal_decimal(hex_str):
+    """
+    Convierte una cadena hexadecimal (por ejemplo "1A3F") a su valor decimal.
+    Recorre la cadena de derecha a izquierda, sumando cada dígito * 16^posición.
+    """
+    hex_str = hex_str.strip()        # Quitamos posibles espacios al inicio o al final
+    resultado = 0
+    multiplicador = 1                # 16^0 al inicio
 
-def hexadecimal_decimal(num):
-    numero = int(letra_numero(num))
-    multiplicador = 1
-    convertido = 0
-    exp = int(len(str(num)))
-    exp2 = int(len(str(num))) - 1
-
-    for i in range(exp):
-        while numero >= 9:
-            numero = int(numero / 10)
-            multiplicador *= 10
-        convertido += numero * 16 ** exp2
-        exp2 -=1
-        numero = num - (multiplicador * numero)
-        num = numero
-        multiplicador = 1
-    print(convertido)
-    return convertido
+    # Recorremos desde el último carácter hasta el primero
+    for c in reversed(hex_str):
+        valor = valor_hexadecimal(c)
+        resultado += valor * multiplicador
+        multiplicador *= 16
+    print(resultado)
+    return resultado
 
 """ Binario """
 def hexadecimal_binario(num):
     decimal = hexadecimal_decimal(num)
-    decimal_sistema(decimal, 2)
-    print("Esta funcion convierte de hexa a binario")
+    binario = decimal_sistema(decimal, 2)
+    print(binario)
+    return binario
 
 """ Decimal """
 def hexadecimal_octal(num):
     decimal = hexadecimal_decimal(num)
-    decimal_sistema(decimal, 8)
-    print("Esta funcion convierte de hexa a octal")
+    octal = decimal_sistema(decimal, 8)
+    print(octal)
+    return octal
 
 
 
@@ -211,7 +243,7 @@ def convertir_numero(original, conversion,num):
 
 def comenzar():
     print("Este programa convierte el numero que se ingrese al sistema numerico deseado, por favor ingrese el numero que desea convertir: ")
-    num = int(input())
+    num = (input())
     original = input(f"Se ingreso el numero {num}, por favor indique en que sistema numerico esta expresado(Decimal,Binario, Octal o Hexadecimal): ").lower()
     convertir = input(f"Por favor ingrese el sistema numerico al que desea convertir su numero: (Decimal,Binario, Octal o Hexadecimal) ").lower()
     """ Se le puede agregar una funcion que valide las entradas del usuario """

@@ -1,42 +1,24 @@
-def letra_numero(l):
-    salida = ""
-    for i in range(len(l)):
-        if l[i] == "A":
-            salida += '10'
-        elif l[i] == 'B':
-            salida += '11'
-        elif l[i] == 'C':
-            salida += '12'
-        elif l[i] == 'D':
-            salida += '13'
-        elif l[i] == 'E':
-            salida += '14'
-        elif l[i] == 'F':
-            salida += '15'
+def octal_decimal(num):
+    """
+    Convierte una cadena con dígitos octales (0–7) a su valor decimal.
+    Ejemplo: "17" → 1*8 + 7 = 15
+    """
+    octal_str = num.strip()     # Quitamos espacios al inicio y al final
+    resultado = 0
+    multiplicador = 1           # 8^0 al empezar
+
+    # Recorremos de derecha a izquierda: el dígito de menor peso primero
+    for c in reversed(octal_str):
+        # Validamos que c sea entre '0' y '7'
+        if '0' <= c <= '7':
+            valor = int(c)
         else:
-            salida += l[i]
-    return salida
+            raise ValueError(f"'{c}' no es un dígito octal válido")
+        resultado += valor * multiplicador
+        multiplicador *= 8
+
+    print(f"el número {octal_str} convertido a decimal es: {resultado}")
+    return resultado
 
 
-def hexadecimal_decimal(num):
-    numero = int(letra_numero(num))
-    num = numero
-    print(num)
-    multiplicador = 1
-    convertido = 0
-    exp = int(len(str(num)))
-    exp2 = int(len(str(num))) - 1
-
-    for i in range(exp):
-        while numero >= 9:
-            numero = int(numero / 10)
-            multiplicador *= 10
-        convertido += numero * 16 ** exp2
-        exp2 -=1
-        numero = num - (multiplicador * numero)
-        num = numero
-        multiplicador = 1
-    print(convertido)
-    return convertido
-
-hexadecimal_decimal("1F")
+octal_decimal("12")
