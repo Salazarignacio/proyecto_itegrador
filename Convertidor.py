@@ -12,21 +12,19 @@ def binario_decimal(num):
             decimal += contador
         num = int(num / 10)
         contador *= 2
-    print(f"BASE BINARIO: {numero} - BASE DECIMAL: {decimal}")
     return decimal
     
 def binario_octal(num):
     num = int(num)
     decimal = binario_decimal(num)
     octal = decimal_sistema(decimal,8)
-    print(octal)
     return octal
     
 def binario_hexadecimal(num):
     num = int(num)
     decimal = binario_decimal(num)
     hexadecimal = decimal_hexadecimal(decimal)
-    print(hexadecimal)
+    # print(hexadecimal)
     return hexadecimal
 
 
@@ -47,7 +45,8 @@ def decimal_sistema(num, base):
         sistema = "octal"
     elif base == 2:
         sistema = "decimal"
-    print(f"{numero} en sistema {sistema} seria {num_convertido} em binario")  
+    return  num_convertido
+    # print(f"{numero} en sistema {sistema} seria {num_convertido} en binario")  
 
 """ Hexadecimal """
 def numero_letra(n):
@@ -77,8 +76,8 @@ def decimal_hexadecimal(num):
         numero = numero // 16
     a_letra = numero_letra(numero % 16)
     numero_convertido = a_letra + numero_convertido
-    print(numero_convertido)
     return numero_convertido
+    #  print(numero_convertido)
  
 
 """################## DE OCTAL A: ##################"""
@@ -87,14 +86,12 @@ def decimal_hexadecimal(num):
 def octal_hexadecimal(num):
     num = int(num)
     num_hexa = hex(int(str(num),8))[2:].upper() # el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
-    print(f"el  número hexadecimal es {num_hexa}")
     return num_hexa
 
 #convertir octal a binario
 def octal_binario(num):
     num = int(num)
     num_bin = bin(int(str(num),8))[2:]# el comando [2:] par eliminar el prefijo que aparece al convertir a hexadecimal.
-    print(f"El número {num} convertido a binario es: {num_bin}")
     return num_bin
 
 #convertir octal a decimal
@@ -201,39 +198,39 @@ def hexadecimal_octal(num):
 def convertir_numero(original, conversion,num):
     """ DE BINARIO A """ 
     if original == "binario" :   
-        if conversion == "decimal":
-            binario_decimal(num)
-        elif conversion == "octal":
-            binario_octal(num)
-        elif conversion == "hexadecimal":
-            binario_hexadecimal(num)
+        if conversion == "decimal":            
+            print(f"El número {num} en sistema {original} seria {binario_decimal(num)} en sistema {conversion}")
+        elif conversion == "octal":            
+            print(f"El número {num} en sistema {original} seria {binario_octal(num)} en sistema {conversion}")
+        elif conversion == "hexadecimal":            
+            print(f"El número {num} en sistema {original} seria {binario_hexadecimal(num)} en sistema {conversion}")
             
     """ DE DECIMAL A """
     if original == "decimal":
-        if conversion == "binario":
-            decimal_sistema(num, 2)
-        elif conversion == "octal":
-            decimal_sistema(num, 8)
-        elif conversion == "hexadecimal":
-            decimal_hexadecimal(num)
+        if conversion == "binario":            
+            print(f"El número {num} en sistema {original} seria {decimal_sistema(num, 2)} en sistema {conversion}")
+        elif conversion == "octal":            
+            print(f"El número {num} en sistema {original} seria {decimal_sistema(num, 8)} en sistema {conversion}")
+        elif conversion == "hexadecimal":            
+            print(f"El numero {num} en sistema {original} seria {decimal_hexadecimal(num)} en sistema {conversion}")
 
     """ DE OCTAL A """
     if original == "octal":
-        if conversion == "binario":
-            octal_binario(num)
-        elif conversion == "decimal":
-            octal_decimal(num)
-        elif conversion == "hexadecimal":
-            octal_hexadecimal(num)
+        if conversion == "binario":            
+            print(f"El número {num} en sistema {original} seria {octal_binario(num)} en sistema {conversion}")
+        elif conversion == "decimal":            
+            print(f"El número {num} en sistema {original} seria {octal_decimal(num)} en sistema {conversion}")
+        elif conversion == "hexadecimal":            
+            print(f"El número {num} en sistema {original} seria {octal_hexadecimal(num)} en sistema {conversion}")
 
     """ DE HEXADECIMAL A """
     if original == "hexadecimal":
-        if conversion == "decimal":
-            hexadecimal_decimal(num)
-        elif conversion == "binario":
-            hexadecimal_binario(num)
-        elif conversion == "octal":
-            hexadecimal_octal(num)
+        if conversion == "decimal":            
+            print(f"El número {num} en sistema {original} seria {hexadecimal_decimal(num)} en sistema {conversion}")
+        elif conversion == "binario":            
+            print(f"El número {num} en sistema {original} seria { hexadecimal_binario(num)} en sistema {conversion}")
+        elif conversion == "octal":            
+            print(f"El número {num} en sistema {original} seria { hexadecimal_octal(num)} en sistema {conversion}")
         
 
 def validar_numero(num,original):
@@ -243,10 +240,30 @@ def validar_numero(num,original):
             if i not in binario:
                 return False      
         return True
-  
+    
+    if original == "octal":
+        octal=8
+        for i in str(num):
+            if int(i) >= octal:
+                return False      
+        return True      
+    
+    if original == "hexadecimal":
+        hexadecimal="0123456789abcdef"
+        for i in str(num):
+            if i not in hexadecimal:
+                return False      
+        return True
+    
+    if original == "decimal":
+        decimal="0123456789"
+        for i in str(num):
+            if i not in decimal:
+                return False      
+        return True
 
-
-
+    if original == "":
+            comenzar()
 
 def comenzar():
     print("Este programa convierte el numero que se ingrese al sistema numerico deseado, por favor ingrese el numero que desea convertir: ")
