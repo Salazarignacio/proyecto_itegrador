@@ -226,6 +226,9 @@ def convertir_numero(original, conversion,num):
         
 
 def validar_numero(num,original,convertir):
+
+   
+
     if original=="binario":
         binario="01"
         for i in str(num):
@@ -244,7 +247,6 @@ def validar_numero(num,original,convertir):
         hexadecimal="0123456789abcdef"
         for i in str(num):
             if i not in hexadecimal:
-                print(i)
                 return False      
         return True
     
@@ -253,10 +255,13 @@ def validar_numero(num,original,convertir):
         for i in str(num):
             if i not in decimal:
                 return False      
-        return True
-
-    if original or convertir == "":
-            comenzar()
+        return True  
+    
+     
+    opciones_validas = ("binario", "decimal", "hexadecimal", "octal")
+    if original=="" or convertir == "" or original not in opciones_validas or convertir not in opciones_validas:
+            return False
+    return True
 
 def comenzar():
     print("Este programa convierte el numero que se ingrese al sistema numerico deseado, por favor ingrese el numero que desea convertir: ")
@@ -266,9 +271,13 @@ def comenzar():
     
     original = input(f"Se ingreso el numero {num}, por favor indique en que sistema numerico esta expresado(Decimal,Binario, Octal o Hexadecimal): ").lower()
     convertir = input(f"Por favor ingrese el sistema numerico al que desea convertir su numero: (Decimal,Binario, Octal o Hexadecimal) ").lower()
+
     while not validar_numero(num,original,convertir):
-        num=int(input(f"{num} no es un numero {original} valido por favor ingrese un numero {original} valido "))
+        num=input(f"{num} o {original} o {convertir} no es un dato valido por favor ingrese un dato valido: Ingrese numero nuevamente ")
+        original = input(f"Se ingreso el numero {num}, por favor indique en que sistema numerico esta expresado(Decimal,Binario, Octal o Hexadecimal): ").lower()
+        convertir = input(f"Por favor ingrese el sistema numerico al que desea convertir su numero: (Decimal,Binario, Octal o Hexadecimal) ").lower()
     """ Se le puede agregar una funcion que valide las entradas del usuario """
+
     convertir_numero(original, convertir, num)
 
 
