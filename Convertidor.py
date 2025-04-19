@@ -47,8 +47,7 @@ def decimal_sistema(num, base):
         sistema = "octal"
     elif base == 2:
         sistema = "decimal"
-    print(f"{numero} en sistema {sistema} seria {num_convertido}")  
-    return num_convertido
+    print(f"{numero} en sistema {sistema} seria {num_convertido} em binario")  
 
 """ Hexadecimal """
 def numero_letra(n):
@@ -200,12 +199,8 @@ def hexadecimal_octal(num):
 """ Esta funcion es la que le pide los datos al usuario y luego decide a que funcion llamar segun los datos ingresados """
 
 def convertir_numero(original, conversion,num):
-    """ Convertimos el texto a minusculas para validar entradas con mayusculas"""
-    original = original.lower() 
-    conversion = conversion.lower()
-
-    """ DE BINARIO A """
-    if original == "binario":
+    """ DE BINARIO A """ 
+    if original == "binario" :   
         if conversion == "decimal":
             binario_decimal(num)
         elif conversion == "octal":
@@ -241,11 +236,25 @@ def convertir_numero(original, conversion,num):
             hexadecimal_octal(num)
         
 
+def validar_numero(num,original):
+    if original=="binario":
+        binario="01"
+        for i in str(num):
+            if i not in binario:
+                return False      
+        return True
+  
+
+
+
+
 def comenzar():
     print("Este programa convierte el numero que se ingrese al sistema numerico deseado, por favor ingrese el numero que desea convertir: ")
     num = (input())
     original = input(f"Se ingreso el numero {num}, por favor indique en que sistema numerico esta expresado(Decimal,Binario, Octal o Hexadecimal): ").lower()
     convertir = input(f"Por favor ingrese el sistema numerico al que desea convertir su numero: (Decimal,Binario, Octal o Hexadecimal) ").lower()
+    while not validar_numero(num,original):
+        num=int(input("ingrese numero valido "))
     """ Se le puede agregar una funcion que valide las entradas del usuario """
     convertir_numero(original, convertir, num)
 
