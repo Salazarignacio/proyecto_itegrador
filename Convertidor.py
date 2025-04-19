@@ -3,7 +3,6 @@
 def binario_decimal(num):
     num = int(num)
     contador = 1
-    numero = num
     decimal = 0
     while num >=1:
         cifra = num / 10
@@ -34,17 +33,10 @@ def binario_hexadecimal(num):
 def decimal_sistema(num, base):
     num = int(num)
     num_convertido=""
-    numero=num
     while num>0:
         ult_digito=num%base
         num_convertido=str(ult_digito)+num_convertido
         num=num//base
-    
-    sistema = ""
-    if base == 8:
-        sistema = "octal"
-    elif base == 2:
-        sistema = "decimal"
     return  num_convertido
     # print(f"{numero} en sistema {sistema} seria {num_convertido} en binario")  
 
@@ -171,21 +163,21 @@ def hexadecimal_decimal(hex_str):
         valor = valor_hexadecimal(c)
         resultado += valor * multiplicador
         multiplicador *= 16
-    print(resultado)
+    
     return resultado
 
 """ Binario """
 def hexadecimal_binario(num):
     decimal = hexadecimal_decimal(num)
     binario = decimal_sistema(decimal, 2)
-    print(binario)
+    
     return binario
 
 """ Decimal """
 def hexadecimal_octal(num):
     decimal = hexadecimal_decimal(num)
     octal = decimal_sistema(decimal, 8)
-    print(octal)
+    
     return octal
 
 
@@ -268,6 +260,9 @@ def validar_numero(num,original):
 def comenzar():
     print("Este programa convierte el numero que se ingrese al sistema numerico deseado, por favor ingrese el numero que desea convertir: ")
     num = (input())
+    while not num:
+        num = input("Por favor ingrese un numero: ")
+    
     original = input(f"Se ingreso el numero {num}, por favor indique en que sistema numerico esta expresado(Decimal,Binario, Octal o Hexadecimal): ").lower()
     convertir = input(f"Por favor ingrese el sistema numerico al que desea convertir su numero: (Decimal,Binario, Octal o Hexadecimal) ").lower()
     while not validar_numero(num,original):
